@@ -64,7 +64,7 @@ func Resize(width, height uint, img image.Image, interp InterpolationFunction) i
 	scaleX, scaleY := calcFactors(width, height, oldWidth, oldHeight)
 	t := Trans2{scaleX, 0, float32(oldBounds.Min.X), 0, scaleY, float32(oldBounds.Min.Y)}
 
-	resizedImg := image.NewRGBA64(image.Rect(0, 0, int(oldWidth/scaleX), int(oldHeight/scaleY)))
+	resizedImg := image.NewRGBA64(image.Rect(0, 0, int(0.7+oldWidth/scaleX), int(0.7+oldHeight/scaleY)))
 	b := resizedImg.Bounds()
 	adjustX := 0.5 * ((oldWidth-1.0)/scaleX - float32(b.Dx()-1))
 	adjustY := 0.5 * ((oldHeight-1.0)/scaleY - float32(b.Dy()-1))
