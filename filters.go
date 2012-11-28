@@ -138,6 +138,11 @@ func createFilter(img image.Image, factor [2]float32, size int, kernel func(floa
 
 // Nearest-neighbor interpolation
 func NearestNeighbor(img image.Image, factor [2]float32) Filter {
+	for i := range factor {
+		if factor[i] > 1.0 {
+			factor[i] = 1.0
+		}
+	}
 	return createFilter(img, factor, 2, func(x float32) (y float32) {
 		if x >= -0.5 && x < 0.5 {
 			y = 1
