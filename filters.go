@@ -69,7 +69,7 @@ func (f *filterModel) convolution1d(x float32, p []colorArray, isRow bool) color
 }
 
 func (f *filterModel) Interpolate(x, y float32) color.RGBA64 {
-	xf, yf := int(x)-len(f.tempRow)/2+1, int(y)-len(f.tempCol)/2+1
+	xf, yf := int(math.Floor(float64(x)))-len(f.tempRow)/2+1, int(math.Floor(float64(y)))-len(f.tempCol)/2+1
 	x -= float32(xf)
 	y -= float32(yf)
 
