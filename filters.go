@@ -24,7 +24,10 @@ import (
 
 // restrict an input float32 to the
 // range of uint16 values
-func clampToUint16(x float32) (y uint16) {
+func clampToUint16(x float32, maxVal float32) (y uint16) {
+	if x > maxVal {
+		x = maxVal
+	}
 	y = uint16(x)
 	if x < 0 {
 		y = 0
@@ -82,10 +85,10 @@ func (f *filterModel) Interpolate(x, y float32) color.RGBA64 {
 
 	c := f.convolution1d(y, f.tempCol, false)
 	return color.RGBA64{
-		clampToUint16(c[0]),
-		clampToUint16(c[1]),
-		clampToUint16(c[2]),
-		clampToUint16(c[3]),
+		clampToUint16(c[0], c[3]),
+		clampToUint16(c[1], c[3]),
+		clampToUint16(c[2], c[3]),
+		clampToUint16(c[3], c[3]),
 	}
 }
 
